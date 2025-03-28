@@ -1,4 +1,5 @@
-const supabase = require("../supabase/client");
+const supabase = require("../utils/supabase");
+const Joi = require("joi");
 
 const { validateSchema } = require("../utils/misc");
 
@@ -9,7 +10,7 @@ const commissionSchema = Joi.object({
   status: Joi.string().valid("pending", "approved", "paid").default("pending"),
 });
 
-async function addCommission(req, res) {
+const addCommission = async (req, res) => {
   try {
     const value = validateSchema(commissionSchema, req.body);
 

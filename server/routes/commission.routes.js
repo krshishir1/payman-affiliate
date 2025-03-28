@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const {addCommission, changeCommissionStatus, getCommissionsByAffiliateId} = require("../controllers/affiliate.controller");
+const {addCommission, changeCommissionStatus, getCommissionsByAffiliateId} = require("../controllers/commission.controller");
 const validateApiKey = require("../middlewares/validateApiKey");
 
 router.post("/new", validateApiKey, addCommission);

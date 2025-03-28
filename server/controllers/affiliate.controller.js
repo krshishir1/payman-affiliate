@@ -1,7 +1,7 @@
-const supabase = require("../supabase/client");
+const supabase = require("../utils/supabase");
 const { validateSchema } = require("../utils/misc");
 const payman = require("../utils/payman");
-
+const Joi = require("joi");
 const affiliateSchema = Joi.object({
   name: Joi.string().min(3).max(50).required(),
   email: Joi.string().email().required(),
