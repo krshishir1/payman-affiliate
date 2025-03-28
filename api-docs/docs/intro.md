@@ -29,7 +29,7 @@ Before making any requests, generate an API key by registering as a new merchant
 All API requests are made to:
 
 ```
-https://api.affiliatesoftware.com/v1
+http://ec2-44-212-56-8.compute-1.amazonaws.com:4000/api
 ```
 
 ### 3. Example Request

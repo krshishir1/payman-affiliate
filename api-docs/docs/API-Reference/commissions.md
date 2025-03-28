@@ -11,9 +11,9 @@ import TabItem from '@theme/TabItem';
 
 # Commissions API
 
-The **Commissions API** allows merchants to register new commissions, update commission status, and retrieve commissions based on an affiliate ID. All requests require an API key in the `Authorization` header.
+The **Commissions API** allows merchants to register new commissions, update commission status, and retrieve commissions based on an affiliate ID. All requests require an API key in the `x-api-key` header.
 
-> **Base URL:** `https://api.affiliatesoftware.com/v1`
+> **Base URL:** `http://ec2-44-212-56-8.compute-1.amazonaws.com:4000/api`
 
 ## 1. Register New Commission
 
@@ -29,15 +29,15 @@ POST /commissions/new
 
 | Key            | Value                 | Required |
 |---------------|----------------------|----------|
-| Authorization | `Bearer YOUR_API_KEY` | ✅        |
+| x-api-key | `YOUR_API_KEY` | ✅        |
 | Content-Type  | `application/json`    | ✅        |
 
 ### **Request Body**
 
 ```json
 {
-  "affiliate_id": "aff123-uuid",
-  "program_id": "prog456-uuid",
+  "affiliate_id": "affiliate-uuid",
+  "program_id": "program-uuid",
   "amount": 100.50,
   "status": "pending"
 }
@@ -48,9 +48,9 @@ POST /commissions/new
 ```json
 {
   "commission": {
-    "id": "comm789",
-    "affiliate_id": "aff123-uuid",
-    "program_id": "prog456-uuid",
+    "id": "commission-uuid",
+    "affiliate_id": "affiliate-uuid",
+    "program_id": "program-uuid",
     "amount": 100.50,
     "status": "pending"
   }
@@ -63,10 +63,10 @@ POST /commissions/new
   <TabItem value="curl" label="cURL">
   
   ```sh
-  curl -X POST "https://api.affiliatesoftware.com/v1/commissions/new" \
-       -H "Authorization: Bearer YOUR_API_KEY" \
+  curl -X POST "{BASE_URL}/commissions/new" \
+       -H "x-api-key: YOUR_API_KEY" \
        -H "Content-Type: application/json" \
-       -d '{"affiliate_id": "aff123-uuid", "program_id": "prog456-uuid", "amount": 100.50, "status": "pending"}'
+       -d '{"affiliate_id": "affiliate-uuid", "program_id": "program-uuid", "amount": 100.50, "status": "pending"}'
   ```
   </TabItem>
 </Tabs>
@@ -87,14 +87,14 @@ PATCH /commissions
 
 | Key            | Value                 | Required |
 |---------------|----------------------|----------|
-| Authorization | `Bearer YOUR_API_KEY` | ✅        |
+| x-api-key | `YOUR_API_KEY` | ✅        |
 | Content-Type  | `application/json`    | ✅        |
 
 ### **Request Body**
 
 ```json
 {
-  "commissionId": "comm789",
+  "commissionId": "commission-uuid",
   "status": "approved"
 }
 ```
@@ -104,7 +104,7 @@ PATCH /commissions
 ```json
 {
   "commission": {
-    "id": "comm789",
+    "id": "commission-uuid",
     "status": "approved"
   }
 }
@@ -116,10 +116,10 @@ PATCH /commissions
   <TabItem value="curl" label="cURL">
   
   ```sh
-  curl -X PATCH "https://api.affiliatesoftware.com/v1/commissions" \
-       -H "Authorization: Bearer YOUR_API_KEY" \
+  curl -X PATCH "{BASE_URL}/commissions" \
+       -H "x-api-key: YOUR_API_KEY" \
        -H "Content-Type: application/json" \
-       -d '{"commissionId": "comm789", "status": "approved"}'
+       -d '{"commissionId": "commission-uuid", "status": "approved"}'
   ```
   </TabItem>
 </Tabs>
@@ -140,7 +140,7 @@ GET /commissions?affiliate_id={affiliate_id}&program_id={program_id}
 
 | Key            | Value                 | Required |
 |---------------|----------------------|----------|
-| Authorization | `Bearer YOUR_API_KEY` | ✅        |
+| x-api-key | `YOUR_API_KEY` | ✅        |
 
 ### **Query Parameters**
 
@@ -155,16 +155,16 @@ GET /commissions?affiliate_id={affiliate_id}&program_id={program_id}
 {
   "commissions": [
     {
-      "id": "comm789",
-      "affiliate_id": "aff123-uuid",
-      "program_id": "prog456-uuid",
+      "id": "commission-uuid-1",
+      "affiliate_id": "affiliate-uuid",
+      "program_id": "program-uuid",
       "amount": 100.50,
       "status": "approved"
     },
     {
-      "id": "comm790",
-      "affiliate_id": "aff123-uuid",
-      "program_id": "prog456-uuid",
+      "id": "commission-uuid-2",
+      "affiliate_id": "affiliate-uuid",
+      "program_id": "program-uuid",
       "amount": 75.25,
       "status": "pending"
     }
@@ -178,15 +178,10 @@ GET /commissions?affiliate_id={affiliate_id}&program_id={program_id}
   <TabItem value="curl" label="cURL">
   
   ```sh
-  curl -X GET "https://api.affiliatesoftware.com/v1/commissions?affiliate_id=aff123-uuid&program_id=prog456-uuid" \
-       -H "Authorization: Bearer YOUR_API_KEY"
+  curl -X GET "{BASE_URL}/commissions?affiliate_id=aff123-uuid&program_id=prog456-uuid" \
+       -H "x-api-key: YOUR_API_KEY"
   ```
   </TabItem>
 </Tabs>
 
 ---
-
-📌 **Next Steps**
-- Learn how to **[authenticate API requests](./authentication)**.
-- Explore other endpoints in the **[API Reference](./api-reference)**.
-- Start integrating your commission tracking today!

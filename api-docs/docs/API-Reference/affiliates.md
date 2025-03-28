@@ -11,9 +11,9 @@ import TabItem from '@theme/TabItem';
 
 # Affiliates API
 
-The **Affiliates API** allows merchants to register new affiliates and retrieve affiliates linked to an affiliate program. All requests require an API key in the `Authorization` header.
+The **Affiliates API** allows merchants to register new affiliates and retrieve affiliates linked to an affiliate program. All requests require an API key in the `x-api-key` header.
 
-> **Base URL:** `https://api.affiliatesoftware.com/v1`
+> **Base URL:** `http://ec2-44-212-56-8.compute-1.amazonaws.com:4000/api`
 
 ## 1. Register New Affiliate
 
@@ -27,22 +27,28 @@ POST /affiliates/new
 
 ### **Headers**
 
-| Key            | Value                 | Required |
-|---------------|----------------------|----------|
-| Authorization | `Bearer YOUR_API_KEY` | ✅        |
-| Content-Type  | `application/json`    | ✅        |
+| Key          | Value              | Required |
+| ------------ | ------------------ | -------- |
+| x-api-key    | `YOUR_API_KEY`     | ✅       |
+| Content-Type | `application/json` | ✅       |
 
 ### **Request Body**
 
 ```json
 {
-  "program_id": "abc123-uuid",
+  "program_id": "program-uuid",
   "new_affiliate": {
     "name": "Jane Doe",
     "email": "jane@example.com",
     "payment_details": {
-      "account_number": "12345678",
-      "routing_number": "87654321"
+      "accountHolderName": "John Doe",
+      "accountHolderType": "individual",
+      "accountNumber": "1234567890",
+      "routingNumber": "011000138",
+      "accountType": "checking",
+      "contactDetails": {
+        "email": "john@example.com"
+      }
     },
     "payout_method": "ACH"
   }
@@ -55,12 +61,12 @@ POST /affiliates/new
 {
   "message": "Affiliate added successfully",
   "affiliate": {
-    "id": "aff123",
+    "id": "affiliate-uuid",
     "name": "Jane Doe",
     "email": "jane@example.com",
-    "program_id": "abc123-uuid",
+    "program_id": "program-uuid",
     "payout_method": "ACH",
-    "payee_id": "payee789"
+    "payee_id": "payman-payee-id"
   }
 }
 ```
@@ -71,20 +77,20 @@ POST /affiliates/new
   <TabItem value="curl" label="cURL">
   
   ```sh
-  curl -X POST "https://api.affiliatesoftware.com/v1/affiliates/new" \
-       -H "Authorization: Bearer YOUR_API_KEY" \
+  curl -X POST "{BASE_URL}/affiliates/new" \
+       -H "x-api-key: YOUR_API_KEY" \
        -H "Content-Type: application/json" \
-       -d '{"program_id": "abc123-uuid", "new_affiliate": {"name": "Jane Doe", "email": "jane@example.com", "payment_details": {"account_number": "12345678", "routing_number": "87654321"}, "payout_method": "ACH"}}'
+       -d '{"program_id": "program-uuid", "new_affiliate": {"name": "Jane Doe", "email": "jane@example.com", "payment_details": {"account_number": "12345678", "routing_number": "87654321"}, "payout_method": "ACH"}}'
   ```
   </TabItem>
 
   <TabItem value="javascript" label="JavaScript (fetch)">
   
   ```js
-  fetch("https://api.affiliatesoftware.com/v1/affiliates/new", {
+  fetch("{BASE_URL}/affiliates/new", {
     method: "POST",
     headers: {
-      "Authorization": "Bearer YOUR_API_KEY",
+      "x-api-key": "YOUR_API_KEY",
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
@@ -93,9 +99,15 @@ POST /affiliates/new
         name: "Jane Doe",
         email: "jane@example.com",
         payment_details: {
-          account_number: "12345678",
-          routing_number: "87654321"
-        },
+      accountHolderName: "Jane Doe",
+      accountHolderType: "individual",
+      accountNumber: "1234567890",
+      routingNumber: "011000138",
+      accountType: "checking",
+      contactDetails: {
+        "email": "john@example.com"
+      }
+    },
         payout_method: "ACH"
       }
     })
@@ -120,15 +132,15 @@ GET /affiliates?program_id={program_id}
 
 ### **Headers**
 
-| Key            | Value                 | Required |
-|---------------|----------------------|----------|
-| Authorization | `Bearer YOUR_API_KEY` | ✅        |
+| Key       | Value          | Required |
+| --------- | -------------- | -------- |
+| x-api-key | `YOUR_API_KEY` | ✅       |
 
 ### **Query Parameters**
 
-| Parameter   | Type   | Description                   | Required |
-|------------|--------|-------------------------------|----------|
-| program_id | string | The UUID of the affiliate program | ✅        |
+| Parameter  | Type   | Description                       | Required |
+| ---------- | ------ | --------------------------------- | -------- |
+| program_id | string | The UUID of the affiliate program | ✅       |
 
 ### **Response**
 
@@ -136,17 +148,17 @@ GET /affiliates?program_id={program_id}
 {
   "affiliates": [
     {
-      "id": "aff123",
+      "id": "affiliate-uuid-1",
       "name": "Jane Doe",
       "email": "jane@example.com",
-      "program_id": "abc123-uuid",
+      "program_id": "program-uuid",
       "payout_method": "ACH"
     },
     {
-      "id": "aff456",
+      "id": "affiliate-uuid-2",
       "name": "John Smith",
       "email": "john@example.com",
-      "program_id": "abc123-uuid",
+      "program_id": "program-uuid",
       "payout_method": "CRYPTO"
     }
   ]
@@ -159,18 +171,18 @@ GET /affiliates?program_id={program_id}
   <TabItem value="curl" label="cURL">
   
   ```sh
-  curl -X GET "https://api.affiliatesoftware.com/v1/affiliates?program_id=abc123-uuid" \
-       -H "Authorization: Bearer YOUR_API_KEY"
+  curl -X GET "{BASE_URL}/affiliates?program_id=program-uuid" \
+       -H "x-api-key: YOUR_API_KEY"
   ```
   </TabItem>
 
   <TabItem value="javascript" label="JavaScript (fetch)">
   
   ```js
-  fetch("https://api.affiliatesoftware.com/v1/affiliates?program_id=abc123-uuid", {
+  fetch("{BASE_URL}/affiliates?program_id=program-uuid", {
     method: "GET",
     headers: {
-      "Authorization": "Bearer YOUR_API_KEY"
+      "x-api-key": "YOUR_API_KEY"
     }
   })
   .then(response => response.json())
@@ -181,7 +193,3 @@ GET /affiliates?program_id={program_id}
 
 ---
 
-📌 **Next Steps**
-- Learn how to **[authenticate API requests](./authentication)**.
-- Explore other endpoints in the **[API Reference](./api-reference)**.
-- Start integrating your affiliate program automation today!

@@ -14,6 +14,8 @@ Cron jobs are used to automatically process affiliate payments based on the conf
 
 ## API Endpoints
 
+Base URL: "http://ec2-44-212-56-8.compute-1.amazonaws.com:4000/api"
+
 ### Merchants
 | Endpoint | Method | Description |
 |----------|--------|-------------|
