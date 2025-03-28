@@ -5,7 +5,7 @@ slug: "/api/generate-api-key"
 sidebar_position: 2
 ---
 
-import GenerateApiKey from '@site/src/components/GenerateApiKey';
+import GenerateApiKey from '@site/src/components/GenerateApiKey.tsx';
 
 # Generate API Key
 
