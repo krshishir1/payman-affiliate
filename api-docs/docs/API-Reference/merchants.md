@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 
 The **Merchants API** allows you to manage merchant details and affiliate programs. All requests require an API key in the `x-api-key` header.
 
-> **Base URL:** `{BASE_URL}`
+> **Base URL:** `http://ec2-44-212-56-8.compute-1.amazonaws.com:4000/api`
 
 ## 1. Get Merchant Details
 
@@ -233,8 +233,3 @@ GET /merchants/program/list
 </Tabs>
 
 ---
-
-📌 **Next Steps**
-- Learn how to **[authenticate API requests](./authentication)**.
-- Explore other endpoints in the **[API Reference](./api-reference)**.
-- Start integrating your affiliate program automation today!

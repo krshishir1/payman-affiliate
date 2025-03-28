@@ -40,6 +40,7 @@ Content-Type: application/json
   "email": "john@example.com",
   "company_name": "Acme Inc."
 }
+```
 
 ### **Response**
 
