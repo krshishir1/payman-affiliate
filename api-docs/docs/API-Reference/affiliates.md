@@ -17,7 +17,7 @@ The **Affiliates API** allows merchants to register new affiliates and retrieve 
 
 ## 1. Register New Affiliate
 
-Register a new affiliate under a specific program.
+Register a new affiliate under a specific program. The new affiliate must provide payment details, that will be used for payouts. The affiliate will be registed as a payee in the Payman platform.
 
 ### **Endpoint**
 

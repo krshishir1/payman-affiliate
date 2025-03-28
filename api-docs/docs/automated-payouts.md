@@ -9,8 +9,6 @@ sidebar_position: 4
 
 Affiliate commissions often require scheduled payouts based on predefined payout frequencies. This document explains how our **automated payout system** leverages **cron jobs** and **Payman AI agents** to handle these transactions seamlessly.
 
-## Use Case: Automating Affiliate Payouts
-
 Merchants using our platform can set **payout frequencies** for their affiliate programs. The system periodically checks for due payouts and automates fund transfers through **Payman AI**.
 
 ### **How It Works**
