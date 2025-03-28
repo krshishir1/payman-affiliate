@@ -5,13 +5,16 @@ slug: "/api/generate-api-key"
 sidebar_position: 2
 ---
 
-<!-- import GenerateApiKey from '../src/components/GenerateApiKey.tsx'; -->
+import GenerateApiKey from '../src/components/GenerateAPIKey.tsx';
 
 # Generate API Key
 
 To access the API, merchants must first register and generate an API key. Fill out the form below to receive your unique API key.
 
-<!-- <GenerateApiKey /> -->
+<GenerateApiKey />
+
+
+---
 
 Alternatively, you can register a new merchant and generate an API key using the following endpoint:
 
